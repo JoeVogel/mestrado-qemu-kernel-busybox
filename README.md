@@ -180,11 +180,11 @@ Para tal, o próprio Kernel nos oferece um aplicativo para construção da image
 
 Para podermos utilizar essa ferramenta, precisaremos de um arquivo cpio_list. Para tal vamos considerar a seguinte estrutura:
 
-/ --x-- linux-5.15.57/
-    |
-    x-- busybox-1.36.0/
-    |
-    x-- cpio_list
+	/ --x-- linux-5.15.57/
+		|
+		x-- busybox-1.36.0/
+		|
+		x-- cpio_list
 
 O arquivo cpio_list podemos preenher com o seguinte conteúdo:
 
