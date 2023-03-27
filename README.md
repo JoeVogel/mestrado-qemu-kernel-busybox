@@ -244,7 +244,7 @@ Dentro do diretório do projeto, rodamos o seguinte comando para criação de um
 
 	qemu-system-x86_64 -m 512M -kernel linux-5.15.57/arch/x86/boot/bzImage -initrd initramfs.img -enable-kvm -append "console=ttyS0 root=/dev/ram init=/init" -nographic
 
-Para rodar uma máquina com as informações solicitadas:
+Para rodar uma máquina com as informações solicitadas na disciplina:
 
 	qemu-system-x86_64 -m 512M -kernel linux-5.15.57/arch/x86/boot/bzImage -initrd initramfs.img -device e1000,netdev=n1,mac=52:54:00:12:34:56 -netdev socket,id=n1,mcast=230.0.0.1:1234 -enable-kvm -nographic -append "console=ttyS0 root=/dev/ram init=/init" -object filter-dump,id=f1,netdev=n1,file=dump1.dat
 
