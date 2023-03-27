@@ -210,7 +210,21 @@ Além disso, precisamos criar o arquivo init.sh descrito no cpio_list, neste arq
 	mount -t proc none /proc
 	mount -t sysfs none /sys
 	# mount -t debugfs none /sys/kernel/debug
-	
+
+	#----------- TURN eth0 UP (Optional)---------
+	#Enable eth0, when running QEMU with -device e1000,netdev=n3,mac=... the interface isn't UP
+	ifconfig eth0 up
+
+	sleep 5
+
+	echo -e "eth0 interface is: "
+	cat /sys/class/net/eth0/operstate
+	echo -e "\n"
+
+	ifconfig
+
+	#-------------------------------------------
+
 	echo -e "\nBoot took $(cut -d' ' -f1 /proc/uptime) seconds\n"
 	
 	sh
@@ -232,7 +246,7 @@ Dentro do diretório do projeto, rodamos o seguinte comando para criação de um
 
 Para rodar uma máquina com as informações solicitadas:
 
-	qemu-system-x86_64 -m 512M -kernel linux-5.15.57/arch/x86/boot/bzImage -initrd initramfs.img -enable-kvm -append "console=ttyS0 root=/dev/ram init=/init" -nographic -netdev socket,id=vlan0,mcast=230.0.0.1:1234 -device pcnet,id=eth0,netdev=vlan0,mac=56:34:12:00:54:08
+	qemu-system-x86_64 -m 512M -kernel linux-5.15.57/arch/x86/boot/bzImage -initrd initramfs.img -device e1000,netdev=n1,mac=52:54:00:12:34:56 -netdev socket,id=n1,mcast=230.0.0.1:1234 -enable-kvm -nographic -append "console=ttyS0 root=/dev/ram init=/init" -object filter-dump,id=f1,netdev=n1,file=dump1.dat
 
 ## Referências
 
